@@ -53,6 +53,178 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         
+        /* 질문 가이드 카드 스타일 */
+        .guide-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            animation: slideUp 0.6s ease-out;
+            border-top: 6px solid #ff6b6b;
+        }
+        
+        .guide-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .guide-icon {
+            font-size: 36px;
+        }
+        
+        .guide-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3436;
+        }
+        
+        .guide-section {
+            margin-bottom: 30px;
+        }
+        
+        .guide-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .guide-subtitle {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .guide-subtitle-icon {
+            font-size: 24px;
+        }
+        
+        .question-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .question-type-card {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #f39c12;
+        }
+        
+        .type-title {
+            font-weight: 700;
+            color: #2d3436;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .type-desc {
+            font-size: 14px;
+            color: #636e72;
+            margin-bottom: 10px;
+        }
+        
+        .type-example {
+            background: rgba(255,255,255,0.7);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2d3436;
+        }
+        
+        .stems-table {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .stem-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .stem-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stem-level {
+            font-weight: 700;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .stem-level.easy {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+        
+        .stem-level.normal {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+        
+        .stem-level.hard {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+        }
+        
+        .stem-template {
+            font-size: 14px;
+            color: #2d3436;
+        }
+        
+        .stem-example {
+            font-size: 13px;
+            color: #636e72;
+        }
+        
+        .criteria-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .criteria-item {
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid #00bcd4;
+        }
+        
+        .criteria-title {
+            font-weight: 700;
+            color: #00838f;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        
+        .criteria-desc {
+            color: #2d3436;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .criteria-check {
+            background: rgba(255,255,255,0.7);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #636e72;
+            font-style: italic;
+        }
+        
         .timeline {
             position: relative;
             padding: 20px 0;
@@ -219,6 +391,15 @@
         }
         
         @media (max-width: 768px) {
+            .question-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .stem-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
             .timeline::before {
                 left: 30px;
             }
@@ -248,6 +429,14 @@
             .step-title {
                 font-size: 22px;
             }
+            
+            .guide-card {
+                padding: 25px;
+            }
+            
+            .guide-title {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -258,6 +447,89 @@
             <p>오늘 우리가 할 활동들을 미리 확인해보세요!</p>
             <div class="total-time">⏱️ 전체 수업 시간: 45분</div>
         </header>
+        
+        <!-- 질문 제작 가이드 카드 -->
+        <div class="guide-card">
+            <div class="guide-header">
+                <span class="guide-icon">💡</span>
+                <h2 class="guide-title">좋은 질문 만드는 법</h2>
+            </div>
+            
+            <!-- 1. 질문의 방향 -->
+            <div class="guide-section">
+                <h3 class="guide-subtitle">
+                    <span class="guide-subtitle-icon">🧭</span>
+                    1. 질문의 방향 선택하기
+                </h3>
+                <div class="question-types">
+                    <div class="question-type-card">
+                        <div class="type-title">📋 사실 확인형</div>
+                        <div class="type-desc">"무엇이 있었나?" - 교과서 내용 중심</div>
+                        <div class="type-example">예시: 공민왕은 어떤 제도를 없앴나요?</div>
+                    </div>
+                    <div class="question-type-card">
+                        <div class="type-title">🔍 인과 탐구형</div>
+                        <div class="type-desc">"왜 그렇게 되었나?" - 원인과 결과 중심</div>
+                        <div class="type-example">예시: 왜 공민왕은 개혁을 추진할 수 있었을까요?</div>
+                    </div>
+                    <div class="question-type-card">
+                        <div class="type-title">⚖️ 가치 판단형</div>
+                        <div class="type-desc">"그건 어떤 의미가 있나?" - 평가·연결 중심</div>
+                        <div class="type-example">예시: 공민왕의 개혁은 완전한 성공이었을까요?</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2. 질문 틀 -->
+            <div class="guide-section">
+                <h3 class="guide-subtitle">
+                    <span class="guide-subtitle-icon">🧩</span>
+                    2. 질문 틀 활용하기
+                </h3>
+                <div class="stems-table">
+                    <div class="stem-row">
+                        <div class="stem-level easy">쉬움</div>
+                        <div class="stem-template">○○는 왜 일어났을까?<br>누가 ○○했을까?</div>
+                        <div class="stem-example">원의 간섭은 왜 줄어들었을까?</div>
+                    </div>
+                    <div class="stem-row">
+                        <div class="stem-level normal">보통</div>
+                        <div class="stem-template">○○는 어떤 결과를 가져왔을까?<br>○○ 사이에는 어떤 관계가 있을까?</div>
+                        <div class="stem-example">공민왕의 개혁과 권문세족의 반발은 어떤 관계일까?</div>
+                    </div>
+                    <div class="stem-row">
+                        <div class="stem-level hard">심화</div>
+                        <div class="stem-template">○○는 우리 사회에 어떤 의미가 있을까?<br>만약 ○○하지 않았다면?</div>
+                        <div class="stem-example">공민왕의 개혁이 실패했다면 고려는 어떻게 되었을까?</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3. 좋은 질문 기준 -->
+            <div class="guide-section">
+                <h3 class="guide-subtitle">
+                    <span class="guide-subtitle-icon">🧠</span>
+                    3. 좋은 질문의 3가지 조건
+                </h3>
+                <div class="criteria-list">
+                    <div class="criteria-item">
+                        <div class="criteria-title">① 교과서에 근거가 있어야 함</div>
+                        <div class="criteria-desc">추측이 아니라, 배운 내용에서 나와야 한다</div>
+                        <div class="criteria-check">✓ "내 질문은 교과서 문장이나 사건을 근거로 했는가?"</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-title">② 생각이 달라질 수 있는 주제</div>
+                        <div class="criteria-desc">답이 하나가 아니라, 토의가 가능한가</div>
+                        <div class="criteria-check">✓ "친구들과 의견이 다를 수 있나?"</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-title">③ 다음 단계로 확장될 수 있는가</div>
+                        <div class="criteria-desc">다음 시대(조선 건국) 등과 연결 가능한가</div>
+                        <div class="criteria-check">✓ "이 질문으로 다른 시대나 인물로 연결할 수 있나?"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="timeline">
             <!-- Step 1 -->
@@ -296,7 +568,7 @@
                     </div>
                     <div class="tip-box">
                         <strong>💡 TIP</strong>
-                        "왜 ~했을까?", "만약 ~했다면?" 같은 질문이 좋아요!
+                        위의 "좋은 질문 만드는 법" 카드를 참고하세요! 질문의 방향을 먼저 정하고, 질문 틀을 활용하면 더 쉽게 만들 수 있어요.
                     </div>
                 </div>
             </div>
