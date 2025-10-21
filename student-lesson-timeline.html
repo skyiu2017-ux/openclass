@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공민왕 수업 활동 안내</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 20px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .total-time {
+            display: inline-block;
+            background: linear-gradient(135deg, #feca57, #ff6b6b);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ffd89b 0%, #19547b 100%);
+            transform: translateX(-50%);
+        }
+        
+        .step {
+            position: relative;
+            margin-bottom: 80px;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+        
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+        .step:nth-child(4) { animation-delay: 0.4s; }
+        .step:nth-child(5) { animation-delay: 0.5s; }
+        .step:nth-child(6) { animation-delay: 0.6s; }
+        
+        .step:nth-child(odd) .step-content {
+            margin-left: 0;
+            margin-right: 52%;
+            text-align: right;
+        }
+        
+        .step:nth-child(even) .step-content {
+            margin-left: 52%;
+            margin-right: 0;
+            text-align: left;
+        }
+        
+        .step-marker {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        
+        .step:nth-child(1) .step-marker {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .step:nth-child(2) .step-marker {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .step:nth-child(3) .step-marker {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .step:nth-child(4) .step-marker {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .step:nth-child(5) .step-marker {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+        
+        .step:nth-child(6) .step-marker {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .step-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        
+        .step-time {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2d3436;
+        }
+        
+        .step-desc {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #636e72;
+            margin-bottom: 20px;
+        }
+        
+        .step-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .action-tag {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border-left: 4px solid #00bcd4;
+        }
+        
+        .tip-box strong {
+            color: #00838f;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .step-marker {
+                left: 30px;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+            
+            .step:nth-child(odd) .step-content,
+            .step:nth-child(even) .step-content {
+                margin-left: 90px;
+                margin-right: 0;
+                text-align: left;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .header p {
+                font-size: 16px;
+            }
+            
+            .step-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏰 공민왕 개혁 수업 활동 안내</h1>
+            <p>오늘 우리가 할 활동들을 미리 확인해보세요!</p>
+            <div class="total-time">⏱️ 전체 수업 시간: 45분</div>
+        </header>
+        
+        <div class="timeline">
+            <!-- Step 1 -->
+            <div class="step">
+                <div class="step-marker">📚</div>
+                <div class="step-content">
+                    <span class="step-time">5분</span>
+                    <h2 class="step-title">1. 수업 시작 & 목표 확인</h2>
+                    <p class="step-desc">
+                        선생님이 오늘 배울 내용을 소개해요. 공민왕의 개혁에 대한 큰 질문 3개를 함께 살펴봅니다.
+                    </p>
+                    <div class="step-actions">
+                        <span class="action-tag">👀 집중해서 듣기</span>
+                        <span class="action-tag">📝 학습 목표 확인</span>
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 TIP</strong>
+                        큰 질문 3개를 잘 기억하세요. 곧 모둠에서 하나를 선택할 거예요!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="step">
+                <div class="step-marker">✏️</div>
+                <div class="step-content">
+                    <span class="step-time">10분</span>
+                    <h2 class="step-title">2. 나만의 작은 질문 만들기</h2>
+                    <p class="step-desc">
+                        교과서를 읽고 궁금한 점을 질문으로 만들어요. 쉬움/보통/심화 중에서 선택해서 최소 2개 이상 작성합니다.
+                    </p>
+                    <div class="step-actions">
+                        <span class="action-tag">📖 교과서 읽기</span>
+                        <span class="action-tag">❓ 질문 2개 이상 만들기</span>
+                        <span class="action-tag">✍️ 답변도 적어보기</span>
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 TIP</strong>
+                        "왜 ~했을까?", "만약 ~했다면?" 같은 질문이 좋아요!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="step">
+                <div class="step-marker">👥</div>
+                <div class="step-content">
+                    <span class="step-time">10분</span>
+                    <h2 class="step-title">3. 짝과 질문 주고받기</h2>
+                    <p class="step-desc">
+                        옆 짝과 내가 만든 질문을 서로 이야기해요. 상대방이 말할 때는 끝까지 듣고, 이해한 내용을 정리합니다.
+                    </p>
+                    <div class="step-actions">
+                        <span class="action-tag">🗣️ 질문 설명하기</span>
+                        <span class="action-tag">👂 경청하기</span>
+                        <span class="action-tag">✅ 체크리스트 확인</span>
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 TIP</strong>
+                        "너가 말한 게 ~라는 뜻이니?" 이렇게 확인 질문을 해보세요!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="step">
+                <div class="step-marker">🏆</div>
+                <div class="step-content">
+                    <span class="step-time">10분</span>
+                    <h2 class="step-title">4. 모둠 토의 & 최고의 질문 선정</h2>
+                    <p class="step-desc">
+                        모둠(4명)이 모여서 각자 만든 질문을 공유해요. 가장 좋은 질문 1개를 함께 선택하고, 그 이유를 이야기합니다.
+                    </p>
+                    <div class="step-actions">
+                        <span class="action-tag">💬 질문 공유하기</span>
+                        <span class="action-tag">🗳️ 투표/선정하기</span>
+                        <span class="action-tag">📝 선정 이유 작성</span>
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 TIP</strong>
+                        모두의 의견을 존중하면서 함께 결정해요!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 5 -->
+            <div class="step">
+                <div class="step-marker">📋</div>
+                <div class="step-content">
+                    <span class="step-time">8분</span>
+                    <h2 class="step-title">5. 교과서 빈칸 채우기 & 확인</h2>
+                    <p class="step-desc">
+                        교과서의 핵심 내용을 빈칸 문제로 확인해요. 신돈, 전민변정도감, 정동행성 같은 중요한 용어를 정리합니다.
+                    </p>
+                    <div class="step-actions">
+                        <span class="action-tag">📖 교과서 다시 보기</span>
+                        <span class="action-tag">✍️ 빈칸 채우기</span>
+                        <span class="action-tag">✓ 정답 확인</span>
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 TIP</strong>
+                        친구와 함께 확인하면 더 재미있어요!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 6 -->
+            <div class="step">
+                <div class="step-marker">🎯</div>
+                <div class="step-content">
+                    <span class="step-time">2분</span>
+                    <h2 class="step-title">6. 마무리 & 소감 나누기</h2>
+                    <p class="step-desc">
+                        오늘 배운 내용을 3문장으로 정리하고, 소감을 이야기해요. 다음 시간 예고도 함께 들어요.
+                    </p>
+                    <div class="step-actions">
+                        <span class="action-tag">📝 3문장 요약</span>
+                        <span class="action-tag">💭 소감 나누기</span>
+                        <span class="action-tag">👋 다음 시간 예고</span>
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 TIP</strong>
+                        오늘 가장 인상 깊었던 내용을 떠올려보세요!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
