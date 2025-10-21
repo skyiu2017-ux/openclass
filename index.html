@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공민왕 개혁 모둠 토론</title>
+    <title>공민왕 개혁 수업 - 메인</title>
     <style>
         * {
             margin: 0;
@@ -15,168 +15,266 @@
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 1100px;
             width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            overflow: hidden;
         }
         
-        .header {
-            background: linear-gradient(135deg, #ff6b6b, #feca57);
-            color: white;
-            padding: 40px;
+        .hero {
             text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
         }
         
-        .header h1 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .hero h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            font-weight: 800;
         }
         
-        .header p {
-            font-size: 18px;
-            opacity: 0.95;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 25px;
-        }
-        
-        .section-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
+        .hero p {
             font-size: 22px;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 15px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 16px;
             font-weight: 600;
-            color: #2d3436;
+            border: 2px solid rgba(255,255,255,0.3);
         }
         
-        .section-icon {
-            font-size: 28px;
-            margin-right: 12px;
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
         }
         
-        .input-group {
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+        
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .card:nth-child(2)::before {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+        
+        .card-icon {
+            font-size: 64px;
             margin-bottom: 20px;
         }
         
-        .input-label {
-            font-weight: 600;
-            margin-bottom: 10px;
+        .card-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 28px;
+            font-weight: 700;
             color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .card-desc {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #636e72;
+            margin-bottom: 25px;
+        }
+        
+        .card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #2d3436;
+        }
+        
+        .feature-icon {
+            font-size: 18px;
+        }
+        
+        .card-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .card:nth-child(1) .card-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .card:nth-child(2) .card-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .card-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .info-section {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(255,255,255,0.25);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .info-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .info-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+        }
+        
+        .info-item strong {
             display: block;
+            margin-bottom: 5px;
             font-size: 16px;
         }
         
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            font-family: inherit;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        input[type="text"]:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .result-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            border: 2px solid #e9ecef;
-        }
-        
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .action-btn {
-            color: white;
-            border: none;
-            padding: 18px 30px;
-            border-radius: 15px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .group-btn {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-        }
-        
-        .padlet-btn {
-            background: linear-gradient(135deg, #e17055, #fdcb6e);
-        }
-        
-        .info-box {
-            background: linear-gradient(135deg, #74b9ff20, #0984e320);
-            border-left: 4px solid #0984e3;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            color: #2d3436;
-        }
-        
-        .info-box-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #0984e3;
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
         }
         
         @media (max-width: 768px) {
-            .content {
-                padding: 25px;
+            body {
+                padding: 20px;
             }
             
-            .header {
-                padding: 30px 20px;
+            .hero h1 {
+                font-size: 28px;
             }
             
-            .header h1 {
-                font-size: 26px;
+            .card {
+                padding: 30px 25px;
             }
             
-            .header p {
-                font-size: 16px;
+            .card-title {
+                font-size: 24px;
             }
             
-            .button-grid {
+            .info-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -184,115 +282,109 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🏆 공민왕의 개혁과 새로운 세력</h1>
-            <p>모둠 토론 결과 정리</p>
+        <div class="hero">
+            <h1>🏰 공민왕의 개혁과 새로운 세력</h1>
+            <p>대화와 경청을 통한 존중과 배려 실천 수업</p>
+            <div class="hero-badge">📚 중학교 역사② 공개수업</div>
         </div>
         
-        <div class="content">
-            <div class="info-box">
-                <div class="info-box-title">📌 활동 안내</div>
-                모둠에서 토론한 내용 중 가장 인상 깊었던 질문과 답변을 작성하고, 
-                패들렛에 공유해주세요!
+        <div class="cards-grid">
+            <!-- Card 1: 수업 타임라인 -->
+            <div class="card" onclick="goToTimeline()">
+                <div class="card-number">1</div>
+                <div class="card-icon">⏱️</div>
+                <h2 class="card-title">수업 활동 안내</h2>
+                <p class="card-desc">
+                    오늘 수업에서 우리가 할 활동들을 시간 순서대로 확인해보세요. 
+                    45분 동안 어떤 일이 일어날지 미리 알아봅시다!
+                </p>
+                <div class="card-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">📋</span>
+                        <span>6단계 활동 타임라인</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⏰</span>
+                        <span>각 활동별 소요 시간</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💡</span>
+                        <span>활동 팁과 주의사항</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>할 일 체크리스트</span>
+                    </div>
+                </div>
+                <button class="card-btn">수업 흐름 확인하기 →</button>
             </div>
             
-            <div class="section">
-                <div class="section-title">
-                    <span class="section-icon">🏆</span>
-                    모둠 토론 결과
-                </div>
-                
-                <div class="input-group">
-                    <label class="input-label">모둠명</label>
-                    <input type="text" id="groupName" placeholder="예: 1모둠, 태양팀 등">
-                </div>
-                
-                <div class="result-card">
-                    <div class="input-group">
-                        <label class="input-label">✨ 우리 모둠이 선정한 최고의 질문</label>
-                        <textarea id="bestQuestion" placeholder="모둠에서 토론하여 선정한 가장 의미 있는 질문을 작성하세요"></textarea>
+            <!-- Card 2: 모둠 토론 페이지 -->
+            <div class="card" onclick="goToWorksheet()">
+                <div class="card-number">2</div>
+                <div class="card-icon">👥</div>
+                <h2 class="card-title">모둠 토론 활동지</h2>
+                <p class="card-desc">
+                    모둠에서 함께 토론한 결과를 정리하는 공간입니다. 
+                    최고의 질문과 답변을 선정하고 패들렛에 공유해보세요!
+                </p>
+                <div class="card-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🏆</span>
+                        <span>최고의 질문 선정</span>
                     </div>
-                    <div class="input-group">
-                        <label class="input-label">💡 그 질문에 대한 우리 모둠의 답변</label>
-                        <textarea id="bestAnswer" placeholder="질문에 대해 모둠원들이 함께 토론한 결과를 정리하세요"></textarea>
+                    <div class="feature-item">
+                        <span class="feature-icon">💬</span>
+                        <span>모둠 토론 결과 작성</span>
                     </div>
-                    <div class="input-group">
-                        <label class="input-label">📝 이 질문과 답변을 선정한 이유</label>
-                        <textarea id="selectionReason" placeholder="왜 이 질문과 답변을 최고로 선택했는지 이유를 작성하세요"></textarea>
+                    <div class="feature-item">
+                        <span class="feature-icon">📝</span>
+                        <span>선정 이유 정리</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🚀</span>
+                        <span>패들렛 바로 공유</span>
                     </div>
                 </div>
+                <button class="card-btn">활동지 작성하기 →</button>
             </div>
-            
-            <div class="button-grid">
-                <button class="action-btn group-btn" onclick="copyGroupData()">
-                    📋 모둠 결과 복사하기
-                    <div style="font-size: 13px; margin-top: 5px; opacity: 0.9;">클립보드에 복사됩니다</div>
-                </button>
-                <button class="action-btn padlet-btn" onclick="goToPadlet()">
-                    🚀 패들렛에 붙여넣기
-                    <div style="font-size: 13px; margin-top: 5px; opacity: 0.9;">패들렛으로 이동</div>
-                </button>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-title">
+                <span>📌</span>
+                <span>수업 정보</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>수업 시간</strong>
+                    총 45분 (1차시)
+                </div>
+                <div class="info-item">
+                    <strong>수업 방식</strong>
+                    질문 중심 · 경청 중심
+                </div>
+                <div class="info-item">
+                    <strong>활동 형태</strong>
+                    개인 → 짝 → 모둠
+                </div>
+                <div class="info-item">
+                    <strong>평가 요소</strong>
+                    질문 만들기 · 경청 · 토론
+                </div>
             </div>
         </div>
     </div>
     
     <script>
-        function copyGroupData() {
-            const groupName = document.getElementById('groupName').value || '미입력 모둠';
-            const bestQ = document.getElementById('bestQuestion').value;
-            const bestA = document.getElementById('bestAnswer').value;
-            const reason = document.getElementById('selectionReason').value || '작성안함';
-            
-            if (!bestQ || !bestA) {
-                alert('⚠️ 최고의 질문과 답변을 먼저 작성해주세요!');
-                return;
-            }
-            
-            const groupText = 
-                `【${groupName}의 최고 질문·답변】\n\n` +
-                `❓ 질문\n${bestQ}\n\n` +
-                `💡 답변\n${bestA}\n\n` +
-                `📌 선정 이유\n${reason}`;
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(groupText).then(() => {
-                    alert('✅ 모둠 결과가 복사되었습니다!\n\n패들렛에 붙여넣기 해주세요.');
-                }).catch(() => {
-                    fallbackCopy(groupText);
-                });
-            } else {
-                fallbackCopy(groupText);
-            }
+        function goToTimeline() {
+            // 타임라인 페이지로 이동
+            window.location.href = 'timeline.html';
         }
         
-        function goToPadlet() {
-            const groupName = document.getElementById('groupName').value;
-            const bestQ = document.getElementById('bestQuestion').value;
-            const bestA = document.getElementById('bestAnswer').value;
-            
-            if (!groupName || !bestQ || !bestA) {
-                const confirmGo = confirm('⚠️ 아직 작성하지 않은 내용이 있습니다.\n\n그래도 패들렛으로 이동하시겠습니까?');
-                if (!confirmGo) return;
-            } else {
-                const confirmGo = confirm('📋 복사한 내용을 패들렛에 붙여넣으세요!\n\n패들렛으로 이동하시겠습니까?');
-                if (!confirmGo) return;
-            }
-            
-            window.open('https://padlet.com/skyiu2017/korea', '_blank');
-        }
-        
-        function fallbackCopy(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                alert('✅ 복사되었습니다!\n\n패들렛에 붙여넣기 해주세요.');
-            } catch (err) {
-                alert('❌ 복사에 실패했습니다.\n\n아래 내용을 수동으로 복사해주세요:\n\n' + text);
-            }
-            document.body.removeChild(textArea);
+        function goToWorksheet() {
+            // 모둠 활동지 페이지로 이동
+            window.location.href = 'worksheet.html';
         }
     </script>
 </body>
